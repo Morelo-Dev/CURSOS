@@ -1,0 +1,62 @@
+/* Layout Principal */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem 1rem;
+  margin: 0;
+  width: 100%;
+  max-width: none;
+}
+
+/* Contenedor de features */
+.feature-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  padding: 2rem;
+  min-height: calc(100vh - 200px);
+}
+
+.feature-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.feature-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.feature-description {
+  font-size: 1.125rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-main {
+    padding: 1rem 0.5rem;
+  }
+  
+  .feature-container {
+    padding: 1rem;
+    margin: 0 0.5rem;
+  }
+  
+  .feature-title {
+    font-size: 1.5rem;
+  }
+  
+  .feature-description {
+    font-size: 1rem;
+  }
+}

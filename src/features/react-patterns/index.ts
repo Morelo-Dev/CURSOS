@@ -1,0 +1,1 @@
+export { ReactPatternsPage } from './ReactPatternsPage';

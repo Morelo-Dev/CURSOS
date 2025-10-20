@@ -1,342 +1,132 @@
 import React from 'react';
-import { 
-  GraduationCap, 
-  Atom, 
-  Palette, 
-  Wrench, 
-  BookOpen, 
-  Github, 
-  Heart, 
-  Star, 
-  Code, 
-  Shield, 
-  Users, 
-  Target,
-  CheckCircle,
-  Clock,
-  ArrowRight,
-  Play,
-  Database,
-  Paintbrush,
-  Bug
+import {
+    GraduationCap,
+    Heart,
+    Star,
+    Users,
+    CheckCircle,
+    ArrowRight,
+    Play
 } from 'lucide-react';
+import { useHomePage } from '../hooks/useHomePage';
+import { CreditItem } from '../components/CreditItem/CreditItem';
 import './HomePage.css';
 
 export const HomePage: React.FC = () => {
-  const handleExplorePatterns = () => {
-    // Simular click en el header para ir a react-patterns
-    const event = new CustomEvent('navigate-to-feature', { 
-      detail: { feature: 'react-patterns' } 
-    });
-    window.dispatchEvent(event);
-  };
-
-  return (
-    <div className="home-page">
-      <div className="hero-section">
-        <div className="hero-content">
-          <div className="hero-icon">
-            <GraduationCap size={64} />
-          </div>
-          <h1 className="hero-title">
-            Bienvenido al Showcase de Desarrollo
-          </h1>
-          <p className="hero-subtitle">
-            Demostraciones prácticas de lo aprendido, patrones avanzados y técnicas modernas de desarrollo
-          </p>
-          <div className="hero-features">
-            <div className="feature-item">
-              <div className="feature-icon">
-                <Atom size={20} />
-              </div>
-              <span>Patrones React Avanzados</span>
-            </div>
-            <div className="feature-item">
-              <div className="feature-icon">
-                <Palette size={20} />
-              </div>
-              <span>Diseño Responsive</span>
-            </div>
-            <div className="feature-item">
-              <div className="feature-icon">
-                <Wrench size={20} />
-              </div>
-              <span>TypeScript & Herramientas Modernas</span>
-            </div>
-            <div className="feature-item">
-              <div className="feature-icon">
-                <BookOpen size={20} />
-              </div>
-              <span>Código Documentado</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="features-overview">
-        <h2>🚀 Demostraciones Disponibles</h2>
-        <div className="features-grid">
-          <div className="feature-card available">
-            <div className="feature-header">
-              <div className="feature-icon">
-                <Atom size={32} />
-              </div>
-              <div className="feature-title">
-                <h3>Patrones de React</h3>
-                <div className="status-badge available">
-                  <CheckCircle size={14} />
-                  <span>Disponible</span>
+    // Usar el hook personalizado para obtener datos y lógica
+    const { heroFeatures, demonstrations, creditsData } = useHomePage();    return (
+        <div className="home-page">
+            <div className="hero-section">
+                <div className="hero-content">
+                    <div className="hero-icon">
+                        <GraduationCap size={64} />
+                    </div>
+                    <h1 className="hero-title">
+                        Bienvenido al Showcase de Desarrollo
+                    </h1>
+                    <p className="hero-subtitle">
+                        Demostraciones prácticas de lo aprendido, patrones avanzados y técnicas modernas de desarrollo
+                    </p>
+                    <div className="hero-features">
+                        {heroFeatures.map((feature, index) => {
+                            const IconComponent = feature.icon;
+                            return (
+                                <div key={index} className="feature-item">
+                                    <div className="feature-icon">
+                                        <IconComponent size={20} />
+                                    </div>
+                                    <span>{feature.text}</span>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
-              </div>
             </div>
-            <p>
-              Implementación completa de patrones avanzados de React incluyendo 
-              Compound Components, Render Props, HOCs, Slot Composition y Custom Hooks.
-            </p>
-            <div className="feature-tech">
-              <span className="tech-tag">React 18</span>
-              <span className="tech-tag">TypeScript</span>
-              <span className="tech-tag">Vite</span>
-              <span className="tech-tag">CSS3</span>
-            </div>
-            <div className="feature-highlights">
-              <div className="highlight-item">
-                <CheckCircle size={16} />
-                <span>5 Patrones Implementados</span>
-              </div>
-              <div className="highlight-item">
-                <CheckCircle size={16} />
-                <span>Gestor de Tareas Completo</span>
-              </div>
-              <div className="highlight-item">
-                <CheckCircle size={16} />
-                <span>Ejemplos Interactivos</span>
-              </div>
-            </div>
-            <button className="feature-action" onClick={handleExplorePatterns}>
-              <Play size={16} />
-              Explorar Patrones
-              <ArrowRight size={14} />
-            </button>
-          </div>
 
-          <div className="feature-card coming-soon">
-            <div className="feature-header">
-              <div className="feature-icon">
-                <Database size={32} />
-              </div>
-              <div className="feature-title">
-                <h3>API & Estado Global</h3>
-                <div className="status-badge coming-soon">
-                  <Clock size={14} />
-                  <span>Próximamente</span>
+            <div className="features-overview">
+                <h2>Demostraciones Disponibles</h2>
+                <div className="features-grid">
+                    {demonstrations.map((demo) => {
+                        const IconComponent = demo.icon;
+                        return (
+                            <div key={demo.id} className={`feature-card ${demo.status}`}>
+                                <div className={`status-badge ${demo.status}`}>
+                                    {demo.status === 'available' && <CheckCircle size={12} />}
+                                    <span>{demo.status === 'available' ? 'Disponible' : 'Próximamente'}</span>
+                                </div>
+                                <div className="feature-header">
+                                    <div className="feature-icon">
+                                        <IconComponent size={20} />
+                                    </div>
+                                    <div className="feature-title">
+                                        <h3>{demo.title}</h3>
+                                    </div>
+                                </div>
+                                <p>{demo.description}</p>
+                                <div className="feature-tech">
+                                    {demo.techTags.map((tag, index) => (
+                                        <span key={index} className="tech-tag">{tag}</span>
+                                    ))}
+                                </div>
+                                {demo.highlights.length > 0 && (
+                                    <div className="feature-highlights">
+                                        {demo.highlights.map((highlight, index) => (
+                                            <div key={index} className="highlight-item">
+                                                <CheckCircle size={14} />
+                                                <span>{highlight}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                                <button
+                                    className={`feature-action ${demo.action ? '' : 'disabled'}`}
+                                    onClick={demo.action || undefined}
+                                    disabled={!demo.action}
+                                >
+                                    {demo.status === 'available' && (
+                                        <>
+                                            <Play size={16} />
+                                            {demo.actionText}
+                                            <ArrowRight size={14} />
+                                        </>
+                                    )}
+                                    {demo.status === 'coming-soon' && (
+                                        <span>{demo.actionText}</span>
+                                    )}
+                                </button>
+                            </div>
+                        );
+                    })}
                 </div>
-              </div>
             </div>
-            <p>
-              Gestión de estado global, integración con APIs REST, cache, 
-              optimistic updates y patrones de fetching avanzados.
-            </p>
-            <div className="feature-tech">
-              <span className="tech-tag">React Query</span>
-              <span className="tech-tag">Zustand</span>
-              <span className="tech-tag">Axios</span>
-            </div>
-          </div>
 
-          <div className="feature-card coming-soon">
-            <div className="feature-header">
-              <div className="feature-icon">
-                <Paintbrush size={32} />
-              </div>
-              <div className="feature-title">
-                <h3>Design Systems</h3>
-                <div className="status-badge coming-soon">
-                  <Clock size={14} />
-                  <span>Próximamente</span>
+            <div className="credits-section">
+                <div className="credits-content">
+                    <h2>
+                        <Heart size={24} />
+                        Créditos y Licencia
+                    </h2>
+                    <div className="credits-info">
+                        {creditsData.map((credit) => (
+                            <CreditItem key={credit.id} credit={credit} />
+                        ))}
+                        
+                        <div className="credit-item">
+                            <div className="credit-header">
+                                <Users size={20} />
+                                <h3>Comunidad</h3>
+                            </div>
+                            <p>
+                                Gracias a la comunidad de desarrolladores que hace posible proyectos educativos como este.
+                            </p>
+                            <div className="community-note">
+                                <Star size={16} />
+                                <span>Si te gustó este proyecto, ¡dale una estrella!</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <p>
-              Creación de un design system completo con componentes reutilizables, 
-              tokens de diseño y documentación interactiva.
-            </p>
-            <div className="feature-tech">
-              <span className="tech-tag">Storybook</span>
-              <span className="tech-tag">Styled Components</span>
-              <span className="tech-tag">Design Tokens</span>
-            </div>
-          </div>
-
-          <div className="feature-card coming-soon">
-            <div className="feature-header">
-              <div className="feature-icon">
-                <Bug size={32} />
-              </div>
-              <div className="feature-title">
-                <h3>Testing Avanzado</h3>
-                <div className="status-badge coming-soon">
-                  <Clock size={14} />
-                  <span>Próximamente</span>
-                </div>
-              </div>
-            </div>
-            <p>
-              Testing integral con unit tests, integration tests, E2E testing 
-              y visual regression testing.
-            </p>
-            <div className="feature-tech">
-              <span className="tech-tag">Vitest</span>
-              <span className="tech-tag">Testing Library</span>
-              <span className="tech-tag">Playwright</span>
-            </div>
-          </div>
         </div>
-      </div>
-
-      <div className="getting-started">
-        <h2>
-          <Target size={24} />
-          Cómo Empezar
-        </h2>
-        <div className="steps-grid">
-          <div className="step-item">
-            <div className="step-number">1</div>
-            <h3>Explora el Header</h3>
-            <p>Usa la navegación del header para moverte entre diferentes features y proyectos.</p>
-          </div>
-          <div className="step-item">
-            <div className="step-number">2</div>
-            <h3>Estudia los Patrones</h3>
-            <p>Comienza con "Patrones React" para ver implementaciones reales de patrones avanzados.</p>
-          </div>
-          <div className="step-item">
-            <div className="step-number">3</div>
-            <h3>Experimenta</h3>
-            <p>Modifica el código, crea nuevas features y practica con los ejemplos interactivos.</p>
-          </div>
-          <div className="step-item">
-            <div className="step-number">4</div>
-            <h3>Construye</h3>
-            <p>Usa lo aprendido para crear tus propios proyectos y patrones personalizados.</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="credits-section">
-        <div className="credits-content">
-          <h2>
-            <Heart size={24} />
-            Créditos y Licencia
-          </h2>
-          <div className="credits-info">
-            <div className="credit-item">
-              <div className="credit-header">
-                <BookOpen size={20} />
-                <h3>Proyecto Educativo</h3>
-              </div>
-              <p>
-                Este proyecto fue desarrollado como <strong>showcase educativo interactivo</strong> para 
-                demostrar a mis compañeros de trabajo lo aprendido sobre <strong>Patrones Avanzados de React</strong> 
-                con TypeScript. Diseñado para ser una experiencia de aprendizaje práctica y visual.
-              </p>
-            </div>
-            
-            <div className="credit-item">
-              <div className="credit-header">
-                <Code size={20} />
-                <h3>Desarrollado por</h3>
-              </div>
-              <p>
-                <strong>Morelo-Dev</strong> - Desarrollador Full Stack especializado en React y TypeScript
-              </p>
-              <a 
-                href="https://github.com/Morelo-Dev" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="github-link"
-              >
-                <Github size={16} />
-                Ver Perfil en GitHub
-              </a>
-            </div>
-            
-            <div className="credit-item">
-              <div className="credit-header">
-                <Star size={20} />
-                <h3>Uso y Contribuciones</h3>
-              </div>
-              <p>
-                Si usas este proyecto como referencia para aprender estos patrones, 
-                considera darle una estrella en GitHub y comparte el conocimiento con otros developers.
-              </p>
-              <div className="usage-note">
-                <strong>Contexto:</strong> 
-                <code>"Showcase de aprendizaje desarrollado para compartir conocimientos con el equipo"</code>
-              </div>
-            </div>
-            
-            <div className="credit-item">
-              <div className="credit-header">
-                <Wrench size={20} />
-                <h3>Tecnologías Utilizadas</h3>
-              </div>
-              <div className="tech-stack">
-                <span className="tech-badge react">React 18</span>
-                <span className="tech-badge typescript">TypeScript</span>
-                <span className="tech-badge vite">Vite</span>
-                <span className="tech-badge lucide">Lucide React</span>
-                <span className="tech-badge css">CSS3</span>
-              </div>
-            </div>
-            
-            <div className="credit-item">
-              <div className="credit-header">
-                <Shield size={20} />
-                <h3>Licencia MIT</h3>
-              </div>
-              <p>
-                Este proyecto está disponible bajo la <strong>MIT License</strong>. 
-                Puedes usarlo libremente para fines educativos y comerciales.
-              </p>
-              <div className="license-actions">
-                <a 
-                  href="https://github.com/Morelo-Dev/CURSOS" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="repo-link"
-                >
-                  <Github size={16} />
-                  Ver Repositorio
-                </a>
-                <a 
-                  href="https://github.com/Morelo-Dev/CURSOS/blob/main/LICENSE" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="license-link"
-                >
-                  <Shield size={16} />
-                  Ver Licencia
-                </a>
-              </div>
-            </div>
-            
-            <div className="credit-item community">
-              <div className="credit-header">
-                <Users size={20} />
-                <h3>Comunidad</h3>
-              </div>
-              <p>
-                Gracias a la comunidad de desarrolladores que hace posible proyectos educativos como este.
-              </p>
-              <div className="community-note">
-                <Star size={16} />
-                <span>Si te gustó este proyecto, ¡dale una estrella!</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };

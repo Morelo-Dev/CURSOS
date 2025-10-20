@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Layout } from './components/Layout';
-import { HomePage } from './pages/HomePage';
 import { ComingSoonPage } from './pages/ComingSoonPage';
 import { ReactPatternsPage } from './features/react-patterns';
 import './App.css';
+import { HomePage } from './pages/HomePage';
 
 function App() {
   const [currentFeature, setCurrentFeature] = useState('home');

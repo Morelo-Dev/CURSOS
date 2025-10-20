@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import { Layout } from './components/Layout';
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Layout } from './components/Layout/Layout';
 import { ComingSoonPage } from './pages/ComingSoonPage';
 import { ReactPatternsPage } from './features/react-patterns';
 import { ReactTypeScriptPage } from './features/react-typescript/ReactTypeScriptPage';
@@ -11,51 +12,23 @@ import './App.css';
 import { HomePage } from './pages/HomePage';
 
 function App() {
-  const [currentFeature, setCurrentFeature] = useState('home');
-
-  useEffect(() => {
-    const handleNavigateToFeature = (event: CustomEvent) => {
-      setCurrentFeature(event.detail.feature);
-    };
-
-    window.addEventListener('navigate-to-feature', handleNavigateToFeature as EventListener);
-    
-    return () => {
-      window.removeEventListener('navigate-to-feature', handleNavigateToFeature as EventListener);
-    };
-  }, []);
-
-  const renderCurrentFeature = () => {
-    switch (currentFeature) {
-      case 'home':
-        return <HomePage />;
-      case 'react-patterns':
-        return <ReactPatternsPage />;
-      case 'react-typescript':
-        return <ReactTypeScriptPage />;
-      case 'react-advanced':
-        return <ReactAdvancedPage />;
-      case 'design-developers':
-        return <DesignDevelopersPage />;
-      case 'clean-code-js':
-        return <CleanCodePage />;
-      case 'ai-tools-developers':
-        return <AIToolsPage />;
-      case 'coming-soon':
-        return <ComingSoonPage />;
-      default:
-        return <HomePage />;
-    }
-  };
-
   return (
     <div className="App">
-      <Layout 
-        currentFeature={currentFeature}
-        onFeatureChange={setCurrentFeature}
-      >
-        {renderCurrentFeature()}
-      </Layout>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/react-patterns" element={<ReactPatternsPage />} />
+            <Route path="/react-typescript" element={<ReactTypeScriptPage />} />
+            <Route path="/react-advanced" element={<ReactAdvancedPage />} />
+            <Route path="/design-developers" element={<DesignDevelopersPage />} />
+            <Route path="/clean-code-js" element={<CleanCodePage />} />
+            <Route path="/ai-tools-developers" element={<AIToolsPage />} />
+            <Route path="/coming-soon" element={<ComingSoonPage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
     </div>
   );
 }

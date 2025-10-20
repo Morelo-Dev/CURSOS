@@ -1,14 +1,14 @@
 import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { featuresConfig } from '../config/featuresConfig';
 import type { FeatureConfig } from '../config/featuresConfig';
 
 export const useNavigation = () => {
+    const navigate = useNavigate();
+    
     const navigateToFeature = useCallback((route: string) => {
-        const event = new CustomEvent('navigate-to-feature', { 
-            detail: { feature: route } 
-        });
-        window.dispatchEvent(event);
-    }, []);
+        navigate(`/${route}`);
+    }, [navigate]);
 
     const getNavigationHandlers = () => {
         const handlers: Record<string, () => void> = {};

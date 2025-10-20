@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   Home, 
   Rocket, 
@@ -13,15 +14,15 @@ import './Header.css';
 
 interface HeaderProps {
   currentFeature: string;
-  onFeatureChange: (feature: string) => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ currentFeature, onFeatureChange }) => {
+export const Header: React.FC<HeaderProps> = ({ currentFeature }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCoursesOpen, setIsCoursesOpen] = useState(false);
+  const navigate = useNavigate();
   
   // Usar el hook centralizado para obtener las features
-  const { getFeatures, navigateToFeature } = useNavigation();
+  const { getFeatures } = useNavigation();
   const demonstrations = getFeatures();
 
   const features = [
@@ -33,10 +34,9 @@ export const Header: React.FC<HeaderProps> = ({ currentFeature, onFeatureChange 
 
   const handleFeatureSelect = (featureId: string) => {
     if (featureId === 'home') {
-      onFeatureChange(featureId);
+      navigate('/');
     } else {
-      // Usar el sistema centralizado de navegación
-      navigateToFeature(featureId);
+      navigate(`/${featureId}`);
     }
     setIsMenuOpen(false);
     setIsCoursesOpen(false);
@@ -99,7 +99,7 @@ export const Header: React.FC<HeaderProps> = ({ currentFeature, onFeatureChange 
                       <button
                         key={demo.id}
                         className={`dropdown-item ${demo.status === 'coming-soon' ? 'coming-soon' : ''}`}
-                        onClick={() => handleFeatureSelect(demo.route)}
+                        onClick={() => handleFeatureSelect(demo.route.replace('/', ''))}
                         title={demo.description}
                         disabled={demo.status === 'coming-soon'}
                       >

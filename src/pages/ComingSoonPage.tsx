@@ -141,20 +141,20 @@ export const ComingSoonPage: React.FC = () => {
         <div className="progress-card">
           <h2>
             <Star size={24} />
-            Estado Actual del Proyecto
+            Estado Actual del Showcase
           </h2>
           <div className="progress-items">
             <div className="progress-item completed">
               <CheckCircle size={20} />
-              <span>Patrones de React - Completado y disponible</span>
+              <span>Patrones de React - Completado y disponible para demostración</span>
             </div>
             <div className="progress-item in-progress">
               <Clock size={20} />
-              <span>Planificación de nuevos cursos - En progreso</span>
+              <span>Planificación de nuevas demostraciones - En progreso</span>
             </div>
             <div className="progress-item pending">
               <Calendar size={20} />
-              <span>Desarrollo de contenido - Próximamente</span>
+              <span>Desarrollo de contenido adicional - Próximamente</span>
             </div>
           </div>
         </div>

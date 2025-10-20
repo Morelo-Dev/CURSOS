@@ -1,32 +1,30 @@
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 import { heroFeatures, createDemonstrations, creditsData } from '../data/homePageData';
+import { useNavigation } from './useNavigation';
 import type { HeroFeature, Demonstration, CreditData } from '../data/homePageData';
 
-// Hook personalizado para la lógica del HomePage
 export const useHomePage = () => {
-    // Función para navegar a patrones
-    const handleExplorePatterns = useCallback(() => {
-        const event = new CustomEvent('navigate-to-feature', { 
-            detail: { feature: 'react-patterns' } 
-        });
-        window.dispatchEvent(event);
-    }, []);
+    // Usar el hook centralizado para navegación
+    const { getNavigationHandlers } = useNavigation();
+    const navigationHandlers = getNavigationHandlers();
 
-    // Obtener datos estructurados
     const getHeroFeatures = (): HeroFeature[] => heroFeatures;
     
     const getDemonstrations = (): Demonstration[] => 
-        createDemonstrations(handleExplorePatterns);
+        createDemonstrations(navigationHandlers);
     
     const getCreditsData = (): CreditData[] => creditsData;
+
+    // Memoizar las demostraciones para optimizar el rendimiento
+    const demonstrations = useMemo(() => getDemonstrations(), [navigationHandlers]);
 
     return {
         // Datos
         heroFeatures: getHeroFeatures(),
-        demonstrations: getDemonstrations(),
+        demonstrations,
         creditsData: getCreditsData(),
         
-        // Funciones
-        handleExplorePatterns
+        // Funciones de navegación (para compatibilidad)
+        handleExplorePatterns: navigationHandlers['react-patterns']
     };
 };

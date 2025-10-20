@@ -190,6 +190,73 @@
   background: #f59e0b;
 }
 
+/* Efectos para items "Coming Soon" en el dropdown */
+.dropdown-item.coming-soon {
+  position: relative;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.dropdown-item.coming-soon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.02) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.02) 50%,
+    rgba(0, 0, 0, 0.02) 75%,
+    transparent 75%
+  );
+  background-size: 10px 10px;
+  pointer-events: none;
+  animation: dropdownPattern 3s linear infinite;
+}
+
+.dropdown-item.coming-soon span:first-child {
+  filter: blur(0.3px);
+  background: linear-gradient(
+    90deg,
+    #1f2937 20%,
+    #9ca3af 40%,
+    #9ca3af 60%,
+    #1f2937 80%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: headerShimmer 2s ease-in-out infinite;
+}
+
+.dropdown-item.coming-soon:hover {
+  background: #f8fafc;
+  opacity: 0.8;
+}
+
+@keyframes dropdownPattern {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 20px 20px;
+  }
+}
+
+@keyframes headerShimmer {
+  0%, 100% {
+    background-position: 200% 0;
+  }
+  50% {
+    background-position: -200% 0;
+  }
+}
+
 @keyframes fadeInDown {
   from {
     opacity: 0;

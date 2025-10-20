@@ -13,7 +13,6 @@ import { CreditItem } from '../components/CreditItem/CreditItem';
 import './HomePage.css';
 
 export const HomePage: React.FC = () => {
-    // Usar el hook personalizado para obtener datos y lógica
     const { heroFeatures, demonstrations, creditsData } = useHomePage();    return (
         <div className="home-page">
             <div className="hero-section">
@@ -44,56 +43,61 @@ export const HomePage: React.FC = () => {
             </div>
 
             <div className="features-overview">
-                <h2>Demostraciones Disponibles</h2>
+                <h2>
+                    Demostraciones Disponibles
+                    <span className="neomorphism-info" title="Técnicas utilizadas:&#10;• Disponibles: Neomorfismo Elevado (box-shadow externas)&#10;• Próximamente: Neomorfismo Hundido (inset box-shadow)&#10;• Fondo uniforme #e8ecef para simular superficie moldeada&#10;• Sombras duales: grises (#d1d5db) y blancas (#ffffff)">?</span>
+                </h2>
                 <div className="features-grid">
                     {demonstrations.map((demo) => {
                         const IconComponent = demo.icon;
                         return (
-                            <div key={demo.id} className={`feature-card ${demo.status}`}>
-                                <div className={`status-badge ${demo.status}`}>
-                                    {demo.status === 'available' && <CheckCircle size={12} />}
-                                    <span>{demo.status === 'available' ? 'Disponible' : 'Próximamente'}</span>
-                                </div>
-                                <div className="feature-header">
-                                    <div className="feature-icon">
-                                        <IconComponent size={20} />
+                            <div key={demo.id} className={`feature-card ${demo.status} ${demo.status === 'available' ? 'neo-elevated' : 'neo-inset'}`}>
+                                <div className="feature-content">
+                                    <div className={`status-badge ${demo.status}`}>
+                                        {demo.status === 'available' && <CheckCircle size={12} />}
+                                        <span>{demo.status === 'available' ? 'Disponible' : 'Próximamente'}</span>
                                     </div>
-                                    <div className="feature-title">
-                                        <h3>{demo.title}</h3>
+                                    <div className="feature-header">
+                                        <div className={`feature-icon neo-icon`}>
+                                            <IconComponent size={20} />
+                                        </div>
+                                        <div className="feature-title">
+                                            <h3>{demo.title}</h3>
+                                        </div>
                                     </div>
-                                </div>
-                                <p>{demo.description}</p>
-                                <div className="feature-tech">
-                                    {demo.techTags.map((tag, index) => (
-                                        <span key={index} className="tech-tag">{tag}</span>
-                                    ))}
-                                </div>
-                                {demo.highlights.length > 0 && (
-                                    <div className="feature-highlights">
-                                        {demo.highlights.map((highlight, index) => (
-                                            <div key={index} className="highlight-item">
-                                                <CheckCircle size={14} />
-                                                <span>{highlight}</span>
-                                            </div>
+                                    <p className="feature-description">{demo.description}</p>
+                                    <div className="feature-tech">
+                                        {demo.techTags.map((tag, index) => (
+                                            <span key={index} className="tech-tag neo-tag">{tag}</span>
                                         ))}
                                     </div>
-                                )}
-                                <button
-                                    className={`feature-action ${demo.action ? '' : 'disabled'}`}
-                                    onClick={demo.action || undefined}
-                                    disabled={!demo.action}
-                                >
-                                    {demo.status === 'available' && (
-                                        <>
-                                            <Play size={16} />
-                                            {demo.actionText}
-                                            <ArrowRight size={14} />
-                                        </>
+                                    {demo.highlights.length > 0 && (
+                                        <div className="feature-highlights">
+                                            {demo.highlights.map((highlight, index) => (
+                                                <div key={index} className="highlight-item">
+                                                    <CheckCircle size={14} />
+                                                    <span>{highlight}</span>
+                                                </div>
+                                            ))}
+                                        </div>
                                     )}
-                                    {demo.status === 'coming-soon' && (
-                                        <span>{demo.actionText}</span>
-                                    )}
-                                </button>
+                                    <button
+                                        className={`feature-action neo-button ${demo.action ? '' : 'disabled'}`}
+                                        onClick={demo.action || undefined}
+                                        disabled={!demo.action}
+                                    >
+                                        {demo.status === 'available' && (
+                                            <>
+                                                <Play size={16} />
+                                                {demo.actionText}
+                                                <ArrowRight size={14} />
+                                            </>
+                                        )}
+                                        {demo.status === 'coming-soon' && (
+                                            <span>🔒 {demo.actionText}</span>
+                                        )}
+                                    </button>
+                                </div>
                             </div>
                         );
                     })}

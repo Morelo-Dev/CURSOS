@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
 import { 
   Home, 
-  Atom, 
   Rocket, 
   GraduationCap, 
-  TypeIcon as TypeScript,
-  Layers,
-  Palette,
-  Code,
-  Bot,
   ChevronDown,
   ChevronUp,
   Menu,
   X
 } from 'lucide-react';
+import { useNavigation } from '../../hooks/useNavigation';
 import './Header.css';
 
 interface HeaderProps {
@@ -24,25 +19,25 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ currentFeature, onFeatureChange }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCoursesOpen, setIsCoursesOpen] = useState(false);
+  
+  // Usar el hook centralizado para obtener las features
+  const { getFeatures, navigateToFeature } = useNavigation();
+  const demonstrations = getFeatures();
 
   const features = [
     { id: 'home', label: 'Inicio', description: 'Página principal', icon: Home, type: 'single' }
-  ];
-
-  const demonstrations = [
-    { id: 'react-patterns', label: 'Patrones de React', description: 'Disponible - Patrones avanzados implementados', icon: Atom, status: 'available' },
-    { id: 'react-typescript', label: 'React.js con TypeScript', description: 'Próximamente', icon: TypeScript, status: 'coming-soon' },
-    { id: 'react-advanced', label: 'React Avanzado', description: 'Próximamente', icon: Layers, status: 'coming-soon' },
-    { id: 'design-developers', label: 'Diseño para Developers', description: 'Próximamente', icon: Palette, status: 'coming-soon' },
-    { id: 'clean-code-js', label: 'Clean Code y Buenas Prácticas con JavaScript', description: 'Próximamente', icon: Code, status: 'coming-soon' },
-    { id: 'ai-tools-developers', label: 'Herramientas de AI para Developers', description: 'Próximamente', icon: Bot, status: 'coming-soon' }
   ];
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleCourses = () => setIsCoursesOpen(!isCoursesOpen);
 
   const handleFeatureSelect = (featureId: string) => {
-    onFeatureChange(featureId);
+    if (featureId === 'home') {
+      onFeatureChange(featureId);
+    } else {
+      // Usar el sistema centralizado de navegación
+      navigateToFeature(featureId);
+    }
     setIsMenuOpen(false);
     setIsCoursesOpen(false);
   };
@@ -103,12 +98,13 @@ export const Header: React.FC<HeaderProps> = ({ currentFeature, onFeatureChange 
                     return (
                       <button
                         key={demo.id}
-                        className="dropdown-item"
-                        onClick={() => handleFeatureSelect(demo.id === 'react-patterns' ? 'react-patterns' : 'coming-soon')}
+                        className={`dropdown-item ${demo.status === 'coming-soon' ? 'coming-soon' : ''}`}
+                        onClick={() => handleFeatureSelect(demo.route)}
                         title={demo.description}
+                        disabled={demo.status === 'coming-soon'}
                       >
                         <IconComponent size={16} />
-                        <span>{demo.label}</span>
+                        <span>{demo.shortTitle}</span>
                         <span className={`status-badge ${demo.status === 'available' ? 'available' : 'coming-soon'}`}>
                           {demo.status === 'available' ? 'Disponible' : 'Próximamente'}
                         </span>

@@ -2,21 +2,18 @@ import React from 'react';
 import type { ReactNode } from 'react';
 import type { Task } from '../types/task';
 
-// Props del componente TaskList usando Render Props pattern
 interface TaskListProps {
   tasks: Task[];
   isLoading?: boolean;
   error?: string | null;
-  shouldError?: boolean; // Para demostración del ErrorBoundary
+  shouldError?: boolean;
   
-  // Render Props - funciones que definen cómo renderizar elementos
   renderTask?: (task: Task, index: number) => ReactNode;
   renderEmpty?: () => ReactNode;
   renderLoading?: () => ReactNode;
   renderError?: (error: string) => ReactNode;
   renderHeader?: (taskCount: number) => ReactNode;
   
-  // Props adicionales
   className?: string;
   onTaskAction?: (action: string, taskId: string) => void;
 }

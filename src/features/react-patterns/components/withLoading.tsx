@@ -5,7 +5,6 @@ interface WithLoadingProps {
   loadingComponent?: React.ReactNode;
 }
 
-// HOC que envuelve un componente añadiendo funcionalidad de loading
 export function withLoading<P extends object>(
   WrappedComponent: React.ComponentType<P>
 ) {
@@ -33,7 +32,6 @@ export function withLoading<P extends object>(
   return WithLoadingComponent;
 }
 
-// Componente de ejemplo usando el HOC
 export const LoadingSpinner: React.FC = () => (
   <div className="loading-spinner">
     <div className="spinner"></div>

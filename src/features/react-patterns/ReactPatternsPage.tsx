@@ -16,8 +16,8 @@ import {
   Check,
   Edit3,
   Trash2,
-  MapPin,
-  Info
+  Info,
+  RefreshCw
 } from 'lucide-react';
 import { SearchBar } from '../../components/common';
 import { Task } from './components/Task/Task';
@@ -31,8 +31,83 @@ import { useModal } from './hooks/useModal';
 import type { Task as TaskType } from './types/task';
 import './ReactPatternsPage.css';
 
-// HOCs combinados para demostrar composición
-const EnhancedTaskList = withLoading(withErrorBoundary(TaskList));
+const TaskListWithRetry: React.FC<{ 
+  tasks: TaskType[];
+  isLoading: boolean;
+  shouldError: boolean;
+  renderTask: (task: TaskType) => React.ReactNode;
+  renderEmpty: () => React.ReactNode;
+}> = ({ tasks, isLoading, shouldError, renderTask, renderEmpty }) => {
+  const [isRetrying, setIsRetrying] = React.useState(false);
+  const [internalShouldError, setInternalShouldError] = React.useState(shouldError);
+
+  React.useEffect(() => {
+    setInternalShouldError(shouldError);
+  }, [shouldError]);
+
+  const handleRetry = () => {
+    setIsRetrying(true);
+    setInternalShouldError(false);
+    
+    setTimeout(() => {
+      setIsRetrying(false);
+      setInternalShouldError(true);
+    }, 2000);
+  };
+
+  const CustomErrorFallback: React.FC<{ error?: Error; resetError: () => void }> = ({ error }) => (
+    <div className="error-boundary">
+      <h2>
+        <Info size={24} />
+        ¡Error Simulado de HOC!
+      </h2>
+      <p>Este error fue lanzado intencionalmente para demostrar el HOC withErrorBoundary.</p>
+      
+      <details>
+        <summary>Ver detalles del error</summary>
+        <div style={{ whiteSpace: 'pre-wrap', marginTop: '0.5rem', fontSize: '0.9rem' }}>
+          {error?.message}
+        </div>
+      </details>
+      
+      <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <button onClick={handleRetry} className="btn btn-primary">
+          <RotateCcw size={16} />
+          Intentar de nuevo
+        </button>
+        <button 
+          onClick={() => window.location.reload()} 
+          className="btn btn-secondary"
+        >
+          <RefreshCw size={16} />
+          Recargar página
+        </button>
+      </div>
+    </div>
+  );
+
+  if (isRetrying) {
+    return (
+      <div className="loading-spinner">
+        <div className="spinner"></div>
+        <p>Reintentando...</p>
+      </div>
+    );
+  }
+
+  const EnhancedTaskListInternal = withLoading(withErrorBoundary(TaskList, CustomErrorFallback));
+
+  return (
+    <EnhancedTaskListInternal
+      tasks={tasks}
+      isLoading={isLoading}
+      shouldError={internalShouldError}
+      renderTask={renderTask}
+      renderEmpty={renderEmpty}
+      renderHeader={() => null}
+    />
+  );
+};
 
 export const ReactPatternsPage: React.FC = () => {
   const {
@@ -49,17 +124,13 @@ export const ReactPatternsPage: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'completed' | 'pending'>('all');
   const [searchTerm, setSearchTerm] = useState('');
   
-  // Estados para demostrar HOCs
   const [isLoading, setIsLoading] = useState(false);
   const [shouldError, setShouldError] = useState(false);
   
-  // Estado para controlar qué sección de demostración mostrar
   const [activeDemo, setActiveDemo] = useState<'compound' | 'renderProps' | 'hocs' | 'slots' | 'hooks' | null>('compound');
 
-  // Función para navegar a una demostración específica
   const navigateToDemo = (demo: 'compound' | 'renderProps' | 'hocs' | 'slots' | 'hooks') => {
     setActiveDemo(demo);
-    // Scroll suave hacia la sección de demostraciones
     setTimeout(() => {
       const demoSection = document.getElementById('interactive-demos');
       if (demoSection) {
@@ -321,85 +392,9 @@ export const ReactPatternsPage: React.FC = () => {
                 <p>
                   <strong>Resultado:</strong> <code>withLoading(withErrorBoundary(TaskList))</code> = Un componente que puede mostrar loading Y manejar errores
                 </p>
-              </div>
-              
-              <div className="demo-controls">
-                <button 
-                  onClick={() => {
-                    setIsLoading(!isLoading);
-                    // Scroll hacia la lista de tareas para ver el efecto
-                    setTimeout(() => {
-                      const taskListElement = document.querySelector('.tasks-header');
-                      if (taskListElement) {
-                        taskListElement.scrollIntoView({ 
-                          behavior: 'smooth', 
-                          block: 'start',
-                          inline: 'nearest'
-                        });
-                      }
-                    }, 100);
-                  }}
-                  className={`btn ${isLoading ? 'btn-secondary' : 'btn-primary'}`}
-                  title="Activa el HOC withLoading para mostrar un spinner de carga"
-                >
-                  {isLoading ? 'Ocultar Loading' : 'Mostrar Loading'}
-                </button>
-                
-                <button 
-                  onClick={() => {
-                    setShouldError(!shouldError);
-                    if (shouldError) {
-                      setTimeout(() => {}, 10);
-                    }
-                    // Scroll hacia la lista de tareas para ver el efecto
-                    setTimeout(() => {
-                      const taskListElement = document.querySelector('.tasks-header');
-                      if (taskListElement) {
-                        taskListElement.scrollIntoView({ 
-                          behavior: 'smooth', 
-                          block: 'start',
-                          inline: 'nearest'
-                        });
-                      }
-                    }, 100);
-                  }}
-                  className={`btn ${shouldError ? 'btn-secondary' : 'btn-warning'}`}
-                  title="Activa el HOC withErrorBoundary lanzando un error controlado"
-                >
-                  {shouldError ? 'Resetear Error' : 'Simular Error'}
-                </button>
-                
-                <button 
-                  onClick={() => {
-                    setIsLoading(true);
-                    setTimeout(() => setIsLoading(false), 3000);
-                    // Scroll hacia la lista de tareas para ver el efecto
-                    setTimeout(() => {
-                      const taskListElement = document.querySelector('.tasks-header');
-                      if (taskListElement) {
-                        taskListElement.scrollIntoView({ 
-                          behavior: 'smooth', 
-                          block: 'start',
-                          inline: 'nearest'
-                        });
-                      }
-                    }, 100);
-                  }}
-                  className="btn btn-info"
-                  title="Muestra loading por 3 segundos para simular una carga real"
-                >
-                  Loading 3 segundos
-                </button>
-              </div>
-              
-              <div className="current-state">
-                <span className={`state-indicator ${isLoading ? 'loading' : shouldError ? 'error' : 'normal'}`}>
-                  Estado actual: {isLoading ? 'Cargando...' : shouldError ? 'Error activo' : 'Normal'}
-                </span>
-              </div>
-              
-              <div className="demo-instruction">
-                <p><strong><MapPin size={16} style={{display: 'inline'}} /> Instrucción:</strong> Al hacer clic en los botones, la vista se desplazará automáticamente hacia la lista de tareas para que puedas ver el efecto de los HOCs en acción.</p>
+                <p>
+                  <strong><Info size={16} style={{display: 'inline'}} /> Nota:</strong> Los botones de control están ubicados junto al título "Todas las tareas" para que puedas ver directamente el efecto de los HOCs.
+                </p>
               </div>
             </div>
           )}
@@ -483,7 +478,7 @@ export const ReactPatternsPage: React.FC = () => {
                 
                 <div className="demo-benefit">
                   <strong><Lightbulb size={16} style={{display: 'inline'}} /> Ventaja:</strong> Lógica reutilizable en cualquier componente: 
-                  <code>const {`{ tasks, addTask }`} = useTasks() // ¡Listo para usar!</code>
+                  <code>const {`{ tasks, addTask }`} = useTasks()</code>
                 </div>
               </div>
             </div>
@@ -523,8 +518,74 @@ export const ReactPatternsPage: React.FC = () => {
         />
       </div>
 
+      {/* Header de tareas con controles HOCs integrados */}
+      <div className="tasks-header">
+        <div className="tasks-header-content">
+          <div className="tasks-header-left">
+            <h2>
+              {filter === 'all' ? `Todas las tareas (${filteredTasks.length})` :
+               filter === 'completed' ? `Completadas (${filteredTasks.filter(t => t.completed).length})` :
+               `Pendientes (${filteredTasks.filter(t => !t.completed).length})`}
+            </h2>
+            <div className="patterns-info">
+              <span className="pattern-badge compound">Compound Components</span>
+              <span className="pattern-badge render-props">Render Props</span>
+              <span className="pattern-badge hoc">HOCs</span>
+              <span className="pattern-badge slots">Slot Composition</span>
+              <span className="pattern-badge hooks">Custom Hooks</span>
+            </div>
+          </div>
+          
+          {/* Controles de HOCs integrados */}
+          <div className="hoc-controls-inline">
+            <div className="hoc-header-inline">
+              <h4 className="hoc-controls-title">Simular HOCs</h4>
+              <div className="current-state-inline">
+                <span>Estado: </span>
+                <span className={`state-indicator-inline ${isLoading ? 'loading' : shouldError ? 'error' : 'normal'}`}>
+                  {isLoading ? 'Cargando...' : shouldError ? 'Error activo' : 'Normal'}
+                </span>
+              </div>
+            </div>
+            
+            <div className="hoc-buttons-inline">
+              <button 
+                onClick={() => {
+                  setIsLoading(!isLoading);
+                }}
+                className={`btn btn-sm ${isLoading ? 'btn-secondary' : 'btn-primary'}`}
+                title="Activa el HOC withLoading para mostrar un spinner de carga"
+              >
+                {isLoading ? 'Ocultar Loading' : 'Loading'}
+              </button>
+              
+              <button 
+                onClick={() => {
+                  setShouldError(!shouldError);
+                }}
+                className={`btn btn-sm ${shouldError ? 'btn-secondary' : 'btn-warning'}`}
+                title="Activa el HOC withErrorBoundary lanzando un error controlado"
+              >
+                {shouldError ? 'Resetear Error' : 'Simular Error'}
+              </button>
+              
+              <button 
+                onClick={() => {
+                  setIsLoading(true);
+                  setTimeout(() => setIsLoading(false), 3000);
+                }}
+                className="btn btn-sm btn-info"
+                title="Muestra loading por 3 segundos para simular una carga real"
+              >
+                Loading 3s
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Patrón: Render Props con HOCs */}
-      <EnhancedTaskList
+      <TaskListWithRetry
         tasks={filteredTasks}
         isLoading={isLoading}
         shouldError={shouldError}
@@ -563,22 +624,6 @@ export const ReactPatternsPage: React.FC = () => {
               <Plus size={16} />
               Crear Tarea
             </button>
-          </div>
-        )}
-        renderHeader={(count: number) => (
-          <div className="tasks-header">
-            <h2>
-              {filter === 'all' ? `Todas las tareas (${count})` :
-               filter === 'completed' ? `Completadas (${count})` :
-               `Pendientes (${count})`}
-            </h2>
-            <div className="patterns-info">
-              <span className="pattern-badge compound">Compound Components</span>
-              <span className="pattern-badge render-props">Render Props</span>
-              <span className="pattern-badge hoc">HOCs</span>
-              <span className="pattern-badge slots">Slot Composition</span>
-              <span className="pattern-badge hooks">Custom Hooks</span>
-            </div>
           </div>
         )}
       />

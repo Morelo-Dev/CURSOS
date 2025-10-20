@@ -73,16 +73,24 @@
 
 /* Header de tareas */
 .tasks-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 1.5rem;
   padding: 1rem 0;
   border-bottom: 2px solid #f3f4f6;
 }
 
+.tasks-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.tasks-header-left {
+  flex: 1;
+}
+
 .tasks-header h2 {
-  margin: 0;
+  margin: 0 0 0.5rem 0;
   font-size: 1.5rem;
   color: #1f2937;
 }
@@ -90,6 +98,78 @@
 .patterns-info {
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Controles inline de HOCs */
+.hoc-controls-inline {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 320px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  align-self: flex-start;
+}
+
+.hoc-header-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hoc-controls-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #475569;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.current-state-inline {
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.state-indicator-inline {
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.state-indicator-inline.normal {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.state-indicator-inline.loading {
+  background: #dbeafe;
+  color: #1d4ed8;
+  border: 1px solid #93c5fd;
+}
+
+.state-indicator-inline.error {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+}
+
+.hoc-buttons-inline {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -356,10 +436,33 @@
     justify-content: center;
   }
   
-  .tasks-header {
+  .tasks-header-content {
     flex-direction: column;
     gap: 1rem;
     align-items: stretch;
+  }
+  
+  .hoc-controls-inline {
+    max-width: none;
+    margin-top: 1rem;
+  }
+  
+  .hoc-header-inline {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  
+  .hoc-controls-title {
+    text-align: center;
+  }
+  
+  .current-state-inline {
+    justify-content: center;
+  }
+  
+  .hoc-buttons-inline {
+    justify-content: center;
   }
   
   .patterns-info {
@@ -568,6 +671,14 @@
 
 .demo-controls {
   margin-bottom: 2rem;
+}
+
+.demo-controls.centered {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
 }
 
 /* Compound Components Demo */
@@ -968,6 +1079,38 @@
   color: #6b7280;
   font-size: 1rem;
   margin: 0;
+}
+
+/* Loading Overlay for HOC Demo */
+.loading-overlay {
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  z-index: 10;
+}
+
+.loading-overlay .loading-spinner {
+  padding: 1.5rem;
+}
+
+.loading-overlay .spinner {
+  width: 30px;
+  height: 30px;
+  border-width: 3px;
+  margin-bottom: 0.5rem;
+}
+
+.loading-overlay p {
+  font-size: 0.9rem;
+  color: #667eea;
+  font-weight: 600;
+}
+
+.content-wrapper.loading-active {
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 /* Enhanced SearchBar styles */

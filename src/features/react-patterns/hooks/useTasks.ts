@@ -104,7 +104,6 @@ export const useTasks = () => {
         if (task.id === id) {
           return { ...task, ...updates };
         }
-        // También buscar en subtareas
         if (task.subtasks.length > 0) {
           const updatedSubtasks = task.subtasks.map(subtask =>
             subtask.id === id ? { ...subtask, ...updates } : subtask
@@ -122,11 +121,9 @@ export const useTasks = () => {
   const deleteTask = useCallback((id: string) => {
     setTasks(prev => 
       prev.map(task => {
-        // Si es una tarea principal
         if (task.id === id) {
           return null;
         }
-        // Si tiene subtareas, filtrar la subtarea
         if (task.subtasks.length > 0) {
           const filteredSubtasks = task.subtasks.filter(subtask => subtask.id !== id);
           if (filteredSubtasks.length !== task.subtasks.length) {
@@ -183,7 +180,6 @@ export const useTasks = () => {
   const filteredAndSortedTasks = useMemo(() => {
     let filtered = [...tasks];
 
-    // Aplicar filtros
     if (filter.priority) {
       filtered = filtered.filter(task => task.priority === filter.priority);
     }
@@ -201,7 +197,6 @@ export const useTasks = () => {
       );
     }
 
-    // Aplicar ordenamiento
     filtered.sort((a, b) => {
       switch (sortBy) {
         case 'priority':

@@ -84,7 +84,6 @@ const DefaultErrorFallback: React.FC<{ error?: Error; resetError: () => void }> 
   </div>
 );
 
-// HOC que envuelve un componente con Error Boundary
 export function withErrorBoundary<P extends object>(
   WrappedComponent: React.ComponentType<P>,
   errorFallback?: React.ComponentType<{ error?: Error; resetError: () => void }>,

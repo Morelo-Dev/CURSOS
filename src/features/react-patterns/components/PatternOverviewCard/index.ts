@@ -1,0 +1,1 @@
+export { PatternOverviewCard } from './PatternOverviewCard';

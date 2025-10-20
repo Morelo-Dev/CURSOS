@@ -1,0 +1,1 @@
+export { PatternsDetailedExplanation } from './PatternsDetailedExplanation.tsx';

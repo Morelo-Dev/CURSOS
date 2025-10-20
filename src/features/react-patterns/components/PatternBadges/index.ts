@@ -1,0 +1,1 @@
+export { PatternBadges } from './PatternBadges.tsx';

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Header } from './Header';
 import './Layout.css';
 
@@ -13,6 +13,19 @@ export const Layout: React.FC<LayoutProps> = ({
   currentFeature, 
   onFeatureChange 
 }) => {
+  useEffect(() => {
+    const handleNavigateToFeature = (event: CustomEvent) => {
+      const { feature } = event.detail;
+      onFeatureChange(feature);
+    };
+
+    window.addEventListener('navigate-to-feature', handleNavigateToFeature as EventListener);
+    
+    return () => {
+      window.removeEventListener('navigate-to-feature', handleNavigateToFeature as EventListener);
+    };
+  }, [onFeatureChange]);
+
   return (
     <div className="app-layout">
       <Header 

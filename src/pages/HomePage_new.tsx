@@ -5,6 +5,9 @@ import {
   Palette, 
   Wrench, 
   BookOpen, 
+  Globe, 
+  TestTube, 
+  Layers, 
   Github, 
   Heart, 
   Star, 
@@ -16,6 +19,7 @@ import {
   Clock,
   ArrowRight,
   Play,
+  Zap,
   Database,
   Paintbrush,
   Bug
@@ -23,14 +27,6 @@ import {
 import './HomePage.css';
 
 export const HomePage: React.FC = () => {
-  const handleExplorePatterns = () => {
-    // Simular click en el header para ir a react-patterns
-    const event = new CustomEvent('navigate-to-feature', { 
-      detail: { feature: 'react-patterns' } 
-    });
-    window.dispatchEvent(event);
-  };
-
   return (
     <div className="home-page">
       <div className="hero-section">
@@ -39,10 +35,10 @@ export const HomePage: React.FC = () => {
             <GraduationCap size={64} />
           </div>
           <h1 className="hero-title">
-            Bienvenido al Showcase de Desarrollo
+            Bienvenido al Curso de Desarrollo
           </h1>
           <p className="hero-subtitle">
-            Demostraciones prácticas de lo aprendido, patrones avanzados y técnicas modernas de desarrollo
+            Proyectos prácticos, patrones avanzados y técnicas modernas de desarrollo
           </p>
           <div className="hero-features">
             <div className="feature-item">
@@ -74,7 +70,7 @@ export const HomePage: React.FC = () => {
       </div>
 
       <div className="features-overview">
-        <h2>🚀 Demostraciones Disponibles</h2>
+        <h2>🚀 Features Disponibles</h2>
         <div className="features-grid">
           <div className="feature-card available">
             <div className="feature-header">
@@ -113,7 +109,7 @@ export const HomePage: React.FC = () => {
                 <span>Ejemplos Interactivos</span>
               </div>
             </div>
-            <button className="feature-action" onClick={handleExplorePatterns}>
+            <button className="feature-action">
               <Play size={16} />
               Explorar Patrones
               <ArrowRight size={14} />
@@ -236,9 +232,9 @@ export const HomePage: React.FC = () => {
                 <h3>Proyecto Educativo</h3>
               </div>
               <p>
-                Este proyecto fue desarrollado como <strong>showcase educativo interactivo</strong> para 
-                demostrar a mis compañeros de trabajo lo aprendido sobre <strong>Patrones Avanzados de React</strong> 
-                con TypeScript. Diseñado para ser una experiencia de aprendizaje práctica y visual.
+                Este proyecto fue desarrollado como material educativo interactivo para aprender 
+                <strong> Patrones Avanzados de React</strong> con TypeScript. Diseñado para ser una 
+                experiencia de aprendizaje práctica y visual.
               </p>
             </div>
             
@@ -267,12 +263,12 @@ export const HomePage: React.FC = () => {
                 <h3>Uso y Contribuciones</h3>
               </div>
               <p>
-                Si usas este proyecto como referencia para aprender estos patrones, 
-                considera darle una estrella en GitHub y comparte el conocimiento con otros developers.
+                Si usas este proyecto como referencia o base para tu aprendizaje, 
+                por favor considera darle una estrella en GitHub y mencionar los créditos correspondientes.
               </p>
               <div className="usage-note">
-                <strong>Contexto:</strong> 
-                <code>"Showcase de aprendizaje desarrollado para compartir conocimientos con el equipo"</code>
+                <strong>Atribución sugerida:</strong> 
+                <code>"Basado en ComposiTasks por @Morelo-Dev"</code>
               </div>
             </div>
             
@@ -282,11 +278,46 @@ export const HomePage: React.FC = () => {
                 <h3>Tecnologías Utilizadas</h3>
               </div>
               <div className="tech-stack">
-                <span className="tech-badge react">React 18</span>
-                <span className="tech-badge typescript">TypeScript</span>
-                <span className="tech-badge vite">Vite</span>
-                <span className="tech-badge lucide">Lucide React</span>
-                <span className="tech-badge css">CSS3</span>
+                <a 
+                  href="https://react.dev/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="tech-badge react"
+                >
+                  React 18
+                </a>
+                <a 
+                  href="https://www.typescriptlang.org/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="tech-badge typescript"
+                >
+                  TypeScript
+                </a>
+                <a 
+                  href="https://vitejs.dev/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="tech-badge vite"
+                >
+                  Vite
+                </a>
+                <a 
+                  href="https://lucide.dev/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="tech-badge lucide"
+                >
+                  Lucide React
+                </a>
+                <a 
+                  href="https://developer.mozilla.org/es/docs/Web/CSS" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="tech-badge css"
+                >
+                  CSS3
+                </a>
               </div>
             </div>
             
@@ -297,7 +328,8 @@ export const HomePage: React.FC = () => {
               </div>
               <p>
                 Este proyecto está disponible bajo la <strong>MIT License</strong>. 
-                Puedes usarlo libremente para fines educativos y comerciales.
+                Puedes usarlo libremente para fines educativos y comerciales, 
+                manteniendo la atribución correspondiente.
               </p>
               <div className="license-actions">
                 <a 

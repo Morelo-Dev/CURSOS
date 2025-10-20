@@ -7,6 +7,7 @@ interface TaskListProps {
   tasks: Task[];
   isLoading?: boolean;
   error?: string | null;
+  shouldError?: boolean; // Para demostración del ErrorBoundary
   
   // Render Props - funciones que definen cómo renderizar elementos
   renderTask?: (task: Task, index: number) => ReactNode;
@@ -24,6 +25,7 @@ export const TaskList: React.FC<TaskListProps> = ({
   tasks,
   isLoading = false,
   error = null,
+  shouldError = false,
   renderTask,
   renderEmpty,
   renderLoading,
@@ -32,6 +34,11 @@ export const TaskList: React.FC<TaskListProps> = ({
   className = '',
   onTaskAction,
 }) => {
+  // Demostración ErrorBoundary - lanzar error si se solicita
+  if (shouldError) {
+    throw new Error('¡Error simulado para demostrar ErrorBoundary! Este error fue lanzado intencionalmente desde el componente TaskList.');
+  }
+
   // Render Loading
   if (isLoading) {
     return (

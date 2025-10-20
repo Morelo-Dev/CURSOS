@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import type { ErrorInfo, ReactNode } from 'react';
+import { AlertTriangle, RotateCcw, RefreshCw } from 'lucide-react';
 
 interface ErrorBoundaryState {
   hasError: boolean;
@@ -45,11 +46,41 @@ const DefaultErrorFallback: React.FC<{ error?: Error; resetError: () => void }> 
   resetError 
 }) => (
   <div className="error-boundary">
-    <h2>¡Oops! Algo salió mal</h2>
-    <details style={{ whiteSpace: 'pre-wrap' }}>
-      {error && error.toString()}
+    <h2>
+      <AlertTriangle size={24} />
+      ¡Oops! Algo salió mal
+    </h2>
+    <p>Se ha producido un error inesperado en la aplicación.</p>
+    
+    <details>
+      <summary>Ver detalles del error</summary>
+      <div style={{ whiteSpace: 'pre-wrap', marginTop: '0.5rem' }}>
+        {error?.name}: {error?.message}
+        {error?.stack && (
+          <div style={{ marginTop: '1rem', fontSize: '0.75rem', opacity: 0.8 }}>
+            Stack trace:
+            {error.stack}
+          </div>
+        )}
+      </div>
     </details>
-    <button onClick={resetError}>Intentar de nuevo</button>
+    
+    <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+      <button onClick={resetError}>
+        <RotateCcw size={16} />
+        Intentar de nuevo
+      </button>
+      <button 
+        onClick={() => window.location.reload()} 
+        style={{ 
+          background: 'linear-gradient(135deg, #6b7280 0%, #4b5563 100%)',
+          color: 'white'
+        }}
+      >
+        <RefreshCw size={16} />
+        Recargar página
+      </button>
+    </div>
   </div>
 );
 

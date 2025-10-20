@@ -489,3 +489,59 @@ Al completar este proyecto habrás practicado:
 - ✅ **Arquitectura Escalable**: Organización de código profesional
 
 ¡Felicidades! 🎉 Ahora tienes una base sólida en los patrones más importantes de React.
+
+---
+
+## 👨‍💻 Créditos y Licencia
+
+### 🎓 Proyecto Educativo
+
+Este proyecto fue desarrollado como material educativo interactivo para aprender **Patrones Avanzados de React** con TypeScript. Está diseñado para ser una experiencia de aprendizaje práctica y visual.
+
+### 👤 Desarrollado por
+
+**Morelo-Dev** - [GitHub Profile](https://github.com/Morelo-Dev)
+
+### 🤝 Uso y Contribuciones
+
+Si encuentras útil este proyecto educativo, considera:
+
+- ⭐ **Dar una estrella** al repositorio
+- 🔄 **Hacer fork** para tu propio aprendizaje
+- 💬 **Compartir** con otros desarrolladores
+- 🐛 **Reportar issues** o sugerir mejoras
+
+### 📄 Atribución
+
+Si usas este proyecto como referencia, base para tu aprendizaje, o lo adaptas para tu trabajo, por favor considera mencionar los créditos:
+
+```
+Basado en ComposiTasks por @Morelo-Dev
+Repositorio: https://github.com/Morelo-Dev/CURSOS
+```
+
+### 🛡️ Licencia
+
+Este proyecto está disponible bajo la **MIT License**.
+
+**Esto significa que puedes:**
+- ✅ Usar para fines educativos y comerciales
+- ✅ Modificar y distribuir
+- ✅ Usar en proyectos privados
+- ✅ Hacer fork y contribuir
+
+**Con la condición de:**
+- 📝 Mantener la atribución del autor original
+- 📋 Incluir la licencia MIT en distribuciones
+
+### 🌟 Agradecimientos
+
+Gracias a todos los desarrolladores que contribuyen al ecosistema de React y a la comunidad de código abierto que hace posible proyectos educativos como este.
+
+---
+
+⭐ **¿Te gustó este proyecto?** ¡No olvides darle una estrella!
+
+💡 **¿Lo encontraste útil para tu aprendizaje?** Compártelo con otros desarrolladores.
+
+🚀 **¿Quieres contribuir?** Las pull requests son bienvenidas.

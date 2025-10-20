@@ -1,4 +1,5 @@
 import React from 'react';
+import { GraduationCap, Atom, Palette, Wrench, BookOpen, Globe, TestTube, Layers, Github, Heart, Star, Code, Shield, Users, Target } from 'lucide-react';
 import './HomePage.css';
 
 export const HomePage: React.FC = () => {
@@ -6,27 +7,38 @@ export const HomePage: React.FC = () => {
     <div className="home-page">
       <div className="hero-section">
         <div className="hero-content">
+          <div className="hero-icon">
+            <GraduationCap size={64} />
+          </div>
           <h1 className="hero-title">
-            🎓 Bienvenido al Curso de Desarrollo
+            Bienvenido al Curso de Desarrollo
           </h1>
           <p className="hero-subtitle">
             Proyectos prácticos, patrones avanzados y técnicas modernas de desarrollo
           </p>
           <div className="hero-features">
             <div className="feature-item">
-              <span className="feature-icon">⚛️</span>
+              <div className="feature-icon">
+                <Atom size={20} />
+              </div>
               <span>Patrones React Avanzados</span>
             </div>
             <div className="feature-item">
-              <span className="feature-icon">🎨</span>
+              <div className="feature-icon">
+                <Palette size={20} />
+              </div>
               <span>Diseño Responsive</span>
             </div>
             <div className="feature-item">
-              <span className="feature-icon">🔧</span>
+              <div className="feature-icon">
+                <Wrench size={20} />
+              </div>
               <span>TypeScript & Herramientas Modernas</span>
             </div>
             <div className="feature-item">
-              <span className="feature-icon">📚</span>
+              <div className="feature-icon">
+                <BookOpen size={20} />
+              </div>
               <span>Código Documentado</span>
             </div>
           </div>
@@ -38,7 +50,9 @@ export const HomePage: React.FC = () => {
         <div className="features-grid">
           <div className="feature-card active">
             <div className="feature-header">
-              <span className="feature-emoji">⚛️</span>
+              <div className="feature-emoji">
+                <Atom size={32} />
+              </div>
               <h3>Patrones de React</h3>
               <span className="status-badge ready">Disponible</span>
             </div>
@@ -54,15 +68,21 @@ export const HomePage: React.FC = () => {
             </div>
             <div className="feature-highlights">
               <div className="highlight-item">
-                <span className="highlight-icon">🧩</span>
+                <div className="highlight-icon">
+                  <Layers size={16} />
+                </div>
                 <span>5 Patrones Implementados</span>
               </div>
               <div className="highlight-item">
-                <span className="highlight-icon">📝</span>
+                <div className="highlight-icon">
+                  <BookOpen size={16} />
+                </div>
                 <span>Gestor de Tareas Completo</span>
               </div>
               <div className="highlight-item">
-                <span className="highlight-icon">🎯</span>
+                <div className="highlight-icon">
+                  <Wrench size={16} />
+                </div>
                 <span>Ejemplos Interactivos</span>
               </div>
             </div>
@@ -70,7 +90,9 @@ export const HomePage: React.FC = () => {
 
           <div className="feature-card coming-soon">
             <div className="feature-header">
-              <span className="feature-emoji">🌐</span>
+              <div className="feature-emoji">
+                <Globe size={32} />
+              </div>
               <h3>API & Estado Global</h3>
               <span className="status-badge soon">Próximamente</span>
             </div>
@@ -87,7 +109,9 @@ export const HomePage: React.FC = () => {
 
           <div className="feature-card coming-soon">
             <div className="feature-header">
-              <span className="feature-emoji">🎨</span>
+              <div className="feature-emoji">
+                <Palette size={32} />
+              </div>
               <h3>Design Systems</h3>
               <span className="status-badge soon">Próximamente</span>
             </div>
@@ -104,7 +128,9 @@ export const HomePage: React.FC = () => {
 
           <div className="feature-card coming-soon">
             <div className="feature-header">
-              <span className="feature-emoji">🧪</span>
+              <div className="feature-emoji">
+                <TestTube size={32} />
+              </div>
               <h3>Testing Avanzado</h3>
               <span className="status-badge soon">Próximamente</span>
             </div>
@@ -122,7 +148,10 @@ export const HomePage: React.FC = () => {
       </div>
 
       <div className="getting-started">
-        <h2>🎯 Cómo Empezar</h2>
+        <h2>
+          <Target size={24} />
+          Cómo Empezar
+        </h2>
         <div className="steps-grid">
           <div className="step-item">
             <div className="step-number">1</div>
@@ -147,28 +176,154 @@ export const HomePage: React.FC = () => {
         </div>
       </div>
 
-      <div className="tech-stack">
-        <h2>🛠️ Tech Stack</h2>
-        <div className="tech-items">
-          <div className="tech-item">
-            <span className="tech-icon">⚛️</span>
-            <span className="tech-name">React 18</span>
-            <span className="tech-desc">Hooks, Suspense, Concurrent Features</span>
-          </div>
-          <div className="tech-item">
-            <span className="tech-icon">📘</span>
-            <span className="tech-name">TypeScript</span>
-            <span className="tech-desc">Tipado estático y mejor DX</span>
-          </div>
-          <div className="tech-item">
-            <span className="tech-icon">⚡</span>
-            <span className="tech-name">Vite</span>
-            <span className="tech-desc">Build tool rápido y moderno</span>
-          </div>
-          <div className="tech-item">
-            <span className="tech-icon">🎨</span>
-            <span className="tech-name">CSS3</span>
-            <span className="tech-desc">Variables CSS, Grid, Flexbox</span>
+      {/* Sección de Créditos y Licencia */}
+      <div className="credits-section">
+        <div className="credits-content">
+          <h2>
+            <Heart size={24} />
+            Créditos y Licencia
+          </h2>
+          <div className="credits-info">
+            <div className="credit-item">
+              <div className="credit-header">
+                <BookOpen size={20} />
+                <h3>Proyecto Educativo</h3>
+              </div>
+              <p>
+                Este proyecto fue desarrollado como material educativo interactivo para aprender 
+                <strong> Patrones Avanzados de React</strong> con TypeScript. Diseñado para ser una 
+                experiencia de aprendizaje práctica y visual.
+              </p>
+            </div>
+            
+            <div className="credit-item">
+              <div className="credit-header">
+                <Code size={20} />
+                <h3>Desarrollado por</h3>
+              </div>
+              <p>
+                <strong>Morelo-Dev</strong> - Desarrollador Full Stack especializado en React y TypeScript
+              </p>
+              <a 
+                href="https://github.com/Morelo-Dev" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="github-link"
+              >
+                <Github size={16} />
+                Ver Perfil en GitHub
+              </a>
+            </div>
+            
+            <div className="credit-item">
+              <div className="credit-header">
+                <Star size={20} />
+                <h3>Uso y Contribuciones</h3>
+              </div>
+              <p>
+                Si usas este proyecto como referencia o base para tu aprendizaje, 
+                por favor considera darle una estrella en GitHub y mencionar los créditos correspondientes.
+              </p>
+              <div className="usage-note">
+                <strong>Atribución sugerida:</strong> 
+                <code>"Basado en ComposiTasks por @Morelo-Dev"</code>
+              </div>
+            </div>
+            
+            <div className="credit-item">
+              <div className="credit-header">
+                <Wrench size={20} />
+                <h3>Tecnologías Utilizadas</h3>
+              </div>
+              <div className="tech-stack">
+                <a 
+                  href="https://react.dev/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="tech-badge react"
+                >
+                  React 18
+                </a>
+                <a 
+                  href="https://www.typescriptlang.org/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="tech-badge typescript"
+                >
+                  TypeScript
+                </a>
+                <a 
+                  href="https://vitejs.dev/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="tech-badge vite"
+                >
+                  Vite
+                </a>
+                <a 
+                  href="https://lucide.dev/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="tech-badge lucide"
+                >
+                  Lucide React
+                </a>
+                <a 
+                  href="https://developer.mozilla.org/es/docs/Web/CSS" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="tech-badge css"
+                >
+                  CSS3
+                </a>
+              </div>
+            </div>
+            
+            <div className="credit-item">
+              <div className="credit-header">
+                <Shield size={20} />
+                <h3>Licencia MIT</h3>
+              </div>
+              <p>
+                Este proyecto está disponible bajo la <strong>MIT License</strong>. 
+                Puedes usarlo libremente para fines educativos y comerciales, 
+                manteniendo la atribución correspondiente.
+              </p>
+              <div className="license-actions">
+                <a 
+                  href="https://github.com/Morelo-Dev/CURSOS" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="repo-link"
+                >
+                  <Github size={16} />
+                  Ver Repositorio
+                </a>
+                <a 
+                  href="https://github.com/Morelo-Dev/CURSOS/blob/main/LICENSE" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="license-link"
+                >
+                  <Shield size={16} />
+                  Ver Licencia
+                </a>
+              </div>
+            </div>
+            
+            <div className="credit-item community">
+              <div className="credit-header">
+                <Users size={20} />
+                <h3>Comunidad</h3>
+              </div>
+              <p>
+                Gracias a la comunidad de desarrolladores que hace posible proyectos educativos como este.
+              </p>
+              <div className="community-note">
+                <Star size={16} />
+                <span>Si te gustó este proyecto, ¡dale una estrella!</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

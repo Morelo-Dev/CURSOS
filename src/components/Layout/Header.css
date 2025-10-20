@@ -20,7 +20,24 @@
   width: 100%;
 }
 
-.header-brand h1 {
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.brand-text h1 {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 700;
@@ -30,7 +47,7 @@
   background-clip: text;
 }
 
-.header-brand p {
+.brand-text p {
   margin: 0;
   font-size: 0.875rem;
   opacity: 0.9;
@@ -55,6 +72,9 @@
   font-size: 0.875rem;
   font-weight: 500;
   backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .nav-item:hover {

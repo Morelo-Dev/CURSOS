@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { useNavigation } from '../../hooks/useNavigation';
 import './Header.css';
+import { HelpButton } from '../../features/system-manager-helps/components/common/Button/HelpButton';
 
 interface HeaderProps {
   currentFeature: string;
@@ -51,6 +52,7 @@ export const Header: React.FC<HeaderProps> = ({ currentFeature }) => {
           </div>
           <div className="brand-text">
             <h1>Showcase de Desarrollo</h1>
+            <HelpButton />
             <p>Demostraciones y Patrones Avanzados</p>
           </div>
         </div>

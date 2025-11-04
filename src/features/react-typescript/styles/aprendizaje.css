@@ -1,0 +1,108 @@
+/* src/features/AprendizajeReactTS/styles/aprendizaje.css */
+
+.aprendizaje-root {
+  display: grid;
+  grid-template-columns: 260px 1fr 1fr;
+  gap: 0;
+  height: 100vh;
+  background: #f8fafc;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.aprendizaje-root > :first-child {
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  overflow-y: auto;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.03);
+}
+
+/* Main content area */
+.aprendizaje-main {
+  padding: 32px;
+  overflow-y: auto;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+}
+
+.aprendizaje-main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.aprendizaje-main::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+.aprendizaje-main::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.aprendizaje-main::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Code panel */
+.aprendizaje-code {
+  padding: 24px;
+  overflow-y: auto;
+  background: #959aa1;
+  color: #e2e8f0;
+}
+
+.aprendizaje-code::-webkit-scrollbar {
+  width: 8px;
+}
+
+.aprendizaje-code::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+.aprendizaje-code::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+
+.aprendizaje-code::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Example viewer */
+.example-header h2 {
+  margin: 0 0 12px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+  line-height: 1.3;
+}
+
+.example-header p {
+  margin: 0 0 24px;
+  color: #6b7280;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.example-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+.example-run {
+  padding: 24px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f9fafb;
+  transition: all 0.2s ease;
+}
+
+.example-run:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.example-empty {
+  padding: 48px 24px;
+  color: #9ca3af;
+  text-align: center;
+  font-size: 15px;
+}

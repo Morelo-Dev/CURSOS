@@ -44,7 +44,7 @@ export const featuresConfig: FeatureConfig[] = [
         shortTitle: 'React + TypeScript',
         description: 'Desarrollo avanzado con React y TypeScript, tipos personalizados, interfaces complejas y patrones de tipado para aplicaciones escalables.',
         icon: TypeScript,
-        status: 'coming-soon',
+        status: 'available',
         techTags: ['React 18', 'TypeScript', 'Vite'],
         highlights: ['Tipos Avanzados', 'Interfaces Complejas', 'Patrones de Tipado'],
         actionText: 'Explorar TypeScript',

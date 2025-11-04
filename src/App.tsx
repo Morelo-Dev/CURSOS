@@ -1,15 +1,14 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './components/Layout/Layout';
 import { ComingSoonPage } from './pages/ComingSoonPage';
 import { ReactPatternsPage } from './features/react-patterns';
-import { ReactTypeScriptPage } from './features/react-typescript/ReactTypeScriptPage';
 import { ReactAdvancedPage } from './features/react-advanced/ReactAdvancedPage';
 import { DesignDevelopersPage } from './features/design-developers/DesignDevelopersPage';
 import { CleanCodePage } from './features/clean-code-js/CleanCodePage';
 import { AIToolsPage } from './features/ai-tools-developers/AIToolsPage';
 import './App.css';
 import { HomePage } from './pages/HomePage';
+import ReactTypeScriptPage from './features/react-typescript/ReactTypeScriptPage';
 
 function App() {
   return (

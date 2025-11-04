@@ -1,0 +1,136 @@
+.apr-sidebar {
+  padding: 12px;
+  border-right: 1px solid #000000;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.apr-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.apr-section-btn {
+  border: none;
+  text-align: left;
+  padding: 8px;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  transition: background 0.2s;
+}
+.apr-section-btn.active {
+  font-weight: bold;
+  box-shadow: 0 2px 8px #014abe22;
+}
+
+/* Colores por sección */
+.apr-section-tipado { background: #014abe; }
+.apr-section-hooks { background: #00897b; }
+.apr-section-eventos { background: #c62828; }
+.apr-section-lazyloading { background: #f9a825; color: #222; }
+.apr-section-redux { background: #7e57c2; }
+
+.apr-examples-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+  /* Quita el scroll */
+  /* overflow: auto; */
+  background: #f4f6fb;
+  padding: 8px 0;
+  border-radius: 6px;
+}
+/* Botones de ejemplo: color por grupo */
+.apr-examples-tipado .apr-example-btn {
+  background: #014abe;
+  color: #fff;
+  border: 1px solid #014abe;
+}
+.apr-examples-tipado .apr-example-btn.active,
+.apr-examples-tipado .apr-example-btn:hover {
+  background: #002e7a;
+  border-color: #002e7a;
+}
+
+.apr-examples-hooks .apr-example-btn {
+  background: #00897b;
+  color: #fff;
+  border: 1px solid #00897b;
+}
+.apr-examples-hooks .apr-example-btn.active,
+.apr-examples-hooks .apr-example-btn:hover {
+  background: #005f56;
+  border-color: #005f56;
+}
+
+.apr-examples-eventos .apr-example-btn {
+  background: #c62828;
+  color: #fff;
+  border: 1px solid #c62828;
+}
+.apr-examples-eventos .apr-example-btn.active,
+.apr-examples-eventos .apr-example-btn:hover {
+  background: #8e1c1c;
+  border-color: #8e1c1c;
+}
+
+.apr-examples-lazyloading .apr-example-btn {
+  background: #f9a825;
+  color: #222;
+  border: 1px solid #f9a825;
+}
+.apr-examples-lazyloading .apr-example-btn.active,
+.apr-examples-lazyloading .apr-example-btn:hover {
+  background: #c49000;
+  border-color: #c49000;
+}
+
+.apr-examples-redux .apr-example-btn {
+  background: #7e57c2;
+  color: #fff;
+  border: 1px solid #7e57c2;
+}
+.apr-examples-redux .apr-example-btn.active,
+.apr-examples-redux .apr-example-btn:hover {
+  background: #5e3997;
+  border-color: #5e3997;
+}
+
+.apr-example-btn {
+  border-radius: 4px;
+  padding: 8px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  font-weight: 500;
+  margin-bottom: 2px;
+  border: none;
+  outline: none;
+}
+.apr-example-btn.active {
+  box-shadow: 0 2px 12px #0002, 0 0 0 2px #fff, 0 0 0 4px #014abe44;
+  transform: translateX(6px) scale(1.04);
+  border: 2px solid #fff;
+  z-index: 1;
+  position: relative;
+}
+.apr-examples-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+
+.apr-examples-divider {
+  border-bottom: 2px solid #636060;
+  margin: 10px ;
+  width: 110%;
+  align-self: center;
+}
